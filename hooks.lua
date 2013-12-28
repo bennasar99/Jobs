@@ -17,9 +17,13 @@ function OnBlockToPickups(World, Digger, BlockX, BlockY, BlockZ, BlockType, Bloc
         if (BlockType == E_BLOCK_CROPS) then
             item1 = Pickups:Get(0)
             item2 = Pickups:Get(1)
-            if (BlockType == E_BLOCK_CROPS) and (BlockMeta == 7) then
+            if (item1 == E_ITEM_WHEAT) or (item2 == E_ITEM_SEEDS) or (item1 == E_ITEM_SEEDS) or (item2 == E_ITEM_WHEAT) then
             
             end
+    end
+    -- TODO: if player is treecutter --
+        if (BlockType == E_BLOCK_LOG) or (BlockType == E_BLOCK_NEW_LOG) then
+        
         end
     end        
 end
