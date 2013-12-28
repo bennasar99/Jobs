@@ -1,7 +1,7 @@
-//TODO: Give money
+-- TODO: Give money --
 
 function OnBlockToPickups(World, Digger, BlockX, BlockY, BlockZ, BlockType, BlockMeta, Pickups)
-    //TODO: if player is miner.
+    -- TODO: if player is miner --
         if (BlockType == E_BLOCK_COAL_ORE) then
 
         elseif (BlockType == E_BLOCK_DIAMOND_ORE) or (BlockType == E_BLOCK_EMERALD_ORE) then
@@ -13,7 +13,7 @@ function OnBlockToPickups(World, Digger, BlockX, BlockY, BlockZ, BlockType, Bloc
         elseif (BlockType == E_BLOCK_REDSTONE_ORE) or (BlockType == E_BLOCK_REDSTONE_ORE_GLOWING) then
     
         end
-    //TODO: if player is farmer.
+    -- TODO: if player is farmer --
         if (BlockType == E_BLOCK_CROPS) then
             item1 = Pickups:Get(0)
             item2 = Pickups:Get(1)
