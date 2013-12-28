@@ -4,7 +4,7 @@ function OnBlockToPickups(World, Digger, BlockX, BlockY, BlockZ, BlockType, Bloc
     //TODO: if player is miner.
         if (BlockType == E_BLOCK_COAL_ORE) then
 
-        elseif (BlockType == E_BLOCK_DIAMOND_ORE) or (BlockType == E_BLOCK_ESMERALD_ORE) then
+        elseif (BlockType == E_BLOCK_DIAMOND_ORE) or (BlockType == E_BLOCK_EMERALD_ORE) then
 
         elseif (BlockType == E_BLOCK_LAPIS_ORE) then
 
