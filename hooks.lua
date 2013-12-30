@@ -9,14 +9,10 @@ function OnBlockToPickups(World, Digger, BlockX, BlockY, BlockZ, BlockType, Bloc
         if (job == "farmer") then
             if (BlockType == E_BLOCK_CROPS) then
                 i1 = Pickups:Get(0)
-                i2 = Pickups:Get(1)
                 item1 = i1.m_ItemType
-                item2 = i2.m_ItemType
                 amount1 = i1.m_ItemCount
-                if (i2 == nil) then
-                    return false
-                end
-                if (item1 == E_ITEM_WHEAT) or (item2 == E_ITEM_WHEAT) then
+                print(amount1)
+                if (item1 == E_ITEM_WHEAT) then
                     Coiny:Call("GiveMoney", PlayerDigger:GetName(), 10)
                     return false   
                 elseif (item1 == E_ITEM_POTATO) or (item1 == E_ITEM_CARROT) then
