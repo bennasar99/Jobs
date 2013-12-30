@@ -101,7 +101,7 @@ function OnPlayerPlacedBlock(Player, BlockX, BlockY, BlockZ, BlockFace, CursorX,
         if (BlockType == E_BLOCK_PUMPKIN) or (BlockType == E_BLOCK_MELON) then
             Coiny:Call("TakeMoney", Player:GetName(), 20)
         end   
-    elseif (job == "trecutter") then
+    elseif (job == "treecutter") then
         if (BlockType == E_BLOCK_LOG) or (BlockType == E_BLOCK_NEW_LOG) then
             Coiny:Call("TakeMoney", Player:GetName(), 20)
         end   
