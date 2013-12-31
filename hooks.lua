@@ -3,8 +3,6 @@ function OnBlockToPickups(World, Digger, BlockX, BlockY, BlockZ, BlockType, Bloc
         return false
     elseif (Digger:IsPlayer()) then
         PlayerDigger = tolua.cast(Digger,"cPlayer")
-        UsersIni = cIniFile()
-        UsersIni:ReadFile("users.ini")
         job = UsersIni:GetValue(PlayerDigger:GetName(),   "Job")
         if (job == "farmer") then
             if (BlockType == E_BLOCK_CROPS) or (BlockType == E_BLOCK_POTATOES) or (BlockType == E_BLOCK_CARROTS) then
@@ -33,8 +31,6 @@ end
 
 function OnPlayerBrokenBlock(Player, BlockX, BlockY, BlockZ, BlockFace, BlockType, BlockMeta)
     World = Player:GetWorld()
-    UsersIni = cIniFile()
-    UsersIni:ReadFile("users.ini")
     job = UsersIni:GetValue(Player:GetName(),   "Job")
     if (job == "miner") then
         if (BlockType == E_BLOCK_COAL_ORE) then
@@ -57,6 +53,14 @@ function OnPlayerBrokenBlock(Player, BlockX, BlockY, BlockZ, BlockFace, BlockTyp
     elseif (job == "farmer") then
         if (BlockType == E_BLOCK_PUMPKIN) or (BlockType == E_BLOCK_MELON) then
             Coiny:Call("GiveMoney", Player:GetName(), 20)
+        elseif (BlockType == E_BLOCK_SUGARCANE) then
+            if (World:GetBlock(BlockX, BlockY + 1, BlockZ) == E_BLOCK_SUGARCANE) and (World:GetBlock(BlockX, BlockY + 2, BlockZ) == E_BLOCK_SUGARCANE) then
+                Coiny:Call("GiveMoney", Player:GetName(), 12)
+            elseif (World:GetBlock(BlockX, BlockY + 1, BlockZ) == E_BLOCK_SUGARCANE) then
+                Coiny:Call("GiveMoney", Player:GetName(), 8)
+            else
+                Coiny:Call("GiveMoney", Player:GetName(), 4)
+            end
         end   
     end 
 end  
@@ -67,7 +71,6 @@ function OnKilling(Victim, Killer)
     end
     if Killer:IsPlayer() then
         Player = tolua.cast(Killer,"cPlayer")
-        UsersIni:ReadFile("users.ini")
         job = UsersIni:GetValue(Player:GetName(),   "Job")
             if (job == "hunter") then
                 if Victim:IsMob() then
@@ -91,7 +94,6 @@ function OnKilling(Victim, Killer)
 end
 
 function OnPlayerPlacedBlock(Player, BlockX, BlockY, BlockZ, BlockFace, CursorX, CursorY, CursorZ, BlockType, BlockMeta)
-    UsersIni:ReadFile("users.ini")
     job = UsersIni:GetValue(Player:GetName(),   "Job")
     if (job == "miner") then
         if (BlockType == E_BLOCK_IRON_ORE) or (BlockType == E_BLOCK_GOLD_ORE) then
@@ -100,6 +102,8 @@ function OnPlayerPlacedBlock(Player, BlockX, BlockY, BlockZ, BlockFace, CursorX,
     elseif (job == "farmer") then
         if (BlockType == E_BLOCK_PUMPKIN) or (BlockType == E_BLOCK_MELON) then
             Coiny:Call("TakeMoney", Player:GetName(), 20)
+        elseif (BlockType == E_BLOCK_SUGARCANE) then
+            Coiny:Call("TakeMoney", Player:GetName(), 4)
         end   
     elseif (job == "treecutter") then
         if (BlockType == E_BLOCK_LOG) or (BlockType == E_BLOCK_NEW_LOG) then
