@@ -1,6 +1,6 @@
 function Initialize(Plugin)
 	Plugin:SetName("Jobs")
-	Plugin:SetVersion(0)
+	Plugin:SetVersion(1)
 		
 	cPluginManager.BindCommand("/jobs",                    "jobs.jobs",                  HandleJobsCommand,                        " - Join, browse or leave jobs.");
 	
@@ -9,6 +9,8 @@ function Initialize(Plugin)
 	cPluginManager.AddHook(cPluginManager.HOOK_KILLING, OnKilling)
 		
 	Coiny = cRoot:Get():GetPluginManager():GetPlugin("Coiny")
+	
+	UsersIni = cIniFile()	
 	
 	LOG("Initialized " .. Plugin:GetName() .. " v." .. Plugin:GetVersion())
 	return true
