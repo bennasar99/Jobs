@@ -1,5 +1,4 @@
 function HandleJobsCommand( Split, Player )
-    UsersIni = cIniFile()
     if #Split < 2 then
         Player:SendMessage("Usage: /jobs <browse/join/leave>")
         return true
@@ -7,7 +6,6 @@ function HandleJobsCommand( Split, Player )
         Player:SendMessage("Jobs: miner, farmer, hunter, treecutter")
         return true
     elseif (Split[2] == "join") then
-        UsersIni:ReadFile("users.ini")
         if #Split < 3 then
             Player:SendMessage('Usage:/jobs join [jobname]')
             return true
@@ -17,7 +15,8 @@ function HandleJobsCommand( Split, Player )
                 return true
             else
                 UsersIni:SetValue(Player:GetName(),   "Job",   Split[3])
-                UsersIni:WriteFile("users.ini")
+                UsersIni:WriteFile("jobs.ini")
+                Job[Player:GetName()] = Split[3]
                 Player:SendMessage("You joined the job " ..Split[3])
                 return true
             end
@@ -26,10 +25,10 @@ function HandleJobsCommand( Split, Player )
             return true
         end
     elseif (Split[2] == "leave") then
-        UsersIni:ReadFile("users.ini")
         if (UsersIni:GetValue(Player:GetName(),   "Job") ~= "") then
             UsersIni:DeleteValue(Player:GetName(),   "Job")
-            UsersIni:WriteFile("users.ini")
+            UsersIni:WriteFile("jobs.ini")
+            Job[Player:GetName()] = nil
             Player:SendMessage("You left your job!")
             return true
         else
@@ -37,7 +36,6 @@ function HandleJobsCommand( Split, Player )
             return true
         end    
      elseif (Split[2] == "info") then
-        UsersIni:ReadFile("users.ini")
         if (UsersIni:GetValue(Player:GetName(),   "Job") ~= "") then
             job = UsersIni:GetValue(Player:GetName(),   "Job")
             Player:SendMessage("You're are working as a " .. job)
