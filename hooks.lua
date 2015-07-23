@@ -3,7 +3,7 @@ function OnBlockToPickups(World, Digger, BlockX, BlockY, BlockZ, BlockType, Bloc
         return false
     elseif (Digger:IsPlayer()) then
         PlayerDigger = tolua.cast(Digger,"cPlayer")
-        job = Job[Player:GetName()]
+        job = Job[PlayerDigger:GetName()]
         if (job == "farmer") then
             if (BlockType == E_BLOCK_CROPS) or (BlockType == E_BLOCK_POTATOES) or (BlockType == E_BLOCK_CARROTS) then
                 item1 = Pickups:Get(0).m_ItemType
