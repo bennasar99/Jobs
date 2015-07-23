@@ -3,13 +3,13 @@ function HandleJobsCommand( Split, Player )
         Player:SendMessage("Usage: /jobs <browse/join/leave>")
         return true
     elseif (Split[2] == "browse") then
-        Player:SendMessage("Jobs: miner, farmer, hunter, treecutter")
+        Player:SendMessage("Jobs: miner, farmer, hunter, treecutter, fisher")
         return true
     elseif (Split[2] == "join") then
         if #Split < 3 then
             Player:SendMessage('Usage:/jobs join [jobname]')
             return true
-        elseif (Split[3] == "miner") or (Split[3] == "farmer") or (Split[3] == "hunter") or (Split[3] == "treecutter") then
+        elseif (Split[3] == "miner") or (Split[3] == "farmer") or (Split[3] == "hunter") or (Split[3] == "treecutter") or (Split[3] == "fisher") then
             if (UsersIni:GetValue(Player:GetName(),   "Job") ~= "") then
                 Player:SendMessage("You already have a job!, if you want to change your job, type /jobs leave before")
                 return true

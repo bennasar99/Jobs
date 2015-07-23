@@ -112,6 +112,27 @@ function OnPlayerPlacingBlock(Player, BlockX, BlockY, BlockZ, BlockType, BlockMe
     end 
 end
 
+function OnPlayerFishing(Player, Reward)
+	job = Job[Player:GetName()]
+	if job == "fisher" then
+		Item = Reward:Get(0)
+		if Item.m_ItemType == E_ITEM_FISH then
+			meta = Item.m_ItemDamage
+			if meta == E_META_RAW_FISH_PUFFERFISH then
+				PM:CallPlugin("Coiny", "addMoneyByName", Player:GetName(), 20)
+			elseif meta == E_META_RAW_FISH_CLOWNFISH then
+				PM:CallPlugin("Coiny", "addMoneyByName", Player:GetName(), 25)
+			elseif meta == E_META_RAW_FISH_SALMON then
+				PM:CallPlugin("Coiny", "addMoneyByName", Player:GetName(), 15)
+			else
+				PM:CallPlugin("Coiny", "addMoneyByName", Player:GetName(), 10)
+			end
+		else
+			PM:CallPlugin("Coiny", "addMoneyByName", Player:GetName(), 10)
+		end
+	end
+end
+		
 function OnPlayerJoined(Player)
 	Job[Player:GetName()] = UsersIni:GetValue(Player:GetName(),   "Job")
 end

@@ -10,13 +10,19 @@ function Initialize(Plugin)
 	cPluginManager.AddHook(cPluginManager.HOOK_PLAYER_PLACING_BLOCK, OnPlayerPlacingBlock)
 	cPluginManager.AddHook(cPluginManager.HOOK_KILLING, OnKilling)
 	cPluginManager.AddHook(cPluginManager.HOOK_PLAYER_BROKEN_BLOCK, OnPlayerBrokenBlock)
+	cPluginManager:AddHook(cPluginManager.HOOK_PLAYER_FISHING, OnPlayerFishing)
 	cPluginManager.AddHook(cPluginManager.HOOK_PLAYER_JOINED, OnPlayerJoined)
 	
 	PM = cPluginManager
 		
 	UsersIni = cIniFile()	
 	UsersIni:ReadFile("jobs.ini")	
-
+	
+	local CheckJob = function(Player)
+		Job[Player:GetName()] = UsersIni:GetValue(Player:GetName(),   "Job")
+	end
+	
+	cRoot:Get():ForEachPlayer(CheckJob)
 	
 	LOG("Initialized " .. Plugin:GetName() .. " v." .. Plugin:GetVersion())
 	return true
