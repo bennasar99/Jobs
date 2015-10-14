@@ -134,5 +134,5 @@ function OnPlayerFishing(Player, Reward)
 end
 		
 function OnPlayerJoined(Player)
-	Job[Player:GetName()] = UsersIni:GetValue(Player:GetName(),   "Job")
+	Job[Player:GetName()] = UsersIni:GetValue(Player:GetUUID(),   "Job")
 end
