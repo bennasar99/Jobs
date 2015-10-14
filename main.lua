@@ -19,7 +19,7 @@ function Initialize(Plugin)
 	UsersIni:ReadFile("jobs.ini")	
 	
 	local CheckJob = function(Player)
-		Job[Player:GetName()] = UsersIni:GetValue(Player:GetName(),   "Job")
+		Job[Player:GetName()] = UsersIni:GetValue(Player:GetUUID(),   "Job")
 	end
 	
 	cRoot:Get():ForEachPlayer(CheckJob)
